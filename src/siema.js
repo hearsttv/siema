@@ -293,7 +293,6 @@ export default class Siema {
    * touchstart event handler
    */
   touchstartHandler(e) {
-    e.stopPropagation();
     this.pointerDown = true;
     this.drag.startX = e.touches[0].pageX;
     this.drag.startY = e.touches[0].pageY;
@@ -303,8 +302,7 @@ export default class Siema {
   /**
    * touchend event handler
    */
-  touchendHandler(e) {
-    e.stopPropagation();
+  touchendHandler() {
     this.pointerDown = false;
     this.sliderFrame.style.webkitTransition = `all ${this.config.duration}ms ${this.config.easing}`;
     this.sliderFrame.style.transition = `all ${this.config.duration}ms ${this.config.easing}`;
@@ -319,8 +317,6 @@ export default class Siema {
    * touchmove event handler
    */
   touchmoveHandler(e) {
-    e.stopPropagation();
-
     if (this.drag.letItGo === null) {
       this.drag.letItGo = Math.abs(this.drag.startY - e.touches[0].pageY) < Math.abs(this.drag.startX - e.touches[0].pageX);
     }
@@ -339,7 +335,6 @@ export default class Siema {
    */
   mousedownHandler(e) {
     e.preventDefault();
-    e.stopPropagation();
     this.pointerDown = true;
     this.drag.startX = e.pageX;
   }
@@ -348,8 +343,7 @@ export default class Siema {
   /**
    * mouseup event handler
    */
-  mouseupHandler(e) {
-    e.stopPropagation();
+  mouseupHandler() {
     this.pointerDown = false;
     this.updateCursor('-webkit-grab');
     this.sliderFrame.style.webkitTransition = `all ${this.config.duration}ms ${this.config.easing}`;
